@@ -40,7 +40,10 @@ INSTALLED_APPS = [
     'myapp'
 ]
 
+AUTH_USER_MODEL = 'myapp.CustomUser'
+
 MIDDLEWARE = [
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -75,8 +78,11 @@ WSGI_APPLICATION = 'Auth.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'notesauth',
+        'USER':'postgres',
+        'PASSWORD':'Bharath@26',
+         'HOST':'localhost'
     }
 }
 
