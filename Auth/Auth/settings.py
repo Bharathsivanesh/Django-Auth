@@ -55,9 +55,9 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),  # Short-lived access token
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=30),  # Longer-lived refresh token
-    'ROTATE_REFRESH_TOKENS': True,  # Optional: Rotate refresh tokens on use
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),  # Short-lived access token
+    'REFRESH_TOKEN_LIFETIME': timedelta(minutes=60),  # Longer-lived refresh token
+    'ROTATE_REFRESH_TOKENS': False,  # Optional: Rotate refresh tokens on use
     'BLACKLIST_AFTER_ROTATION': True, # Optional: Blacklist old refresh tokens
     'ALGORITHM': 'HS256',
     'SIGNING_KEY': SECRET_KEY, # Use your Django project's SECRET_KEY

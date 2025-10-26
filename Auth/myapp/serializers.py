@@ -21,7 +21,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = CustomUser
         fields = ('id', 'username', 'email', 'password', 'user_type')
 
-    # Override create method to hash password
+# Override create method to hash password
     def create(self, validated_data):
         user = CustomUser.objects.create(
             username=validated_data['username'],
