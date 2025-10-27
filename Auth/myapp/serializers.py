@@ -2,6 +2,25 @@ from rest_framework import serializers
 from .models import CustomUser, Note
 from django.contrib.auth.password_validation import validate_password
 from rest_framework.validators import UniqueValidator
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+
+        # Add custom claims if needed
+        token['user_type'] = user.user_type
+        return token
+
+    def validate(self, attrs):
+        data = super().validate(attrs)
+
+        # Add extra response data
+        data['user_type'] = self.user.user_type
+        data['username'] = self.user.username
+        return data
 
 
 # Custom User Serializer
@@ -43,3 +62,5 @@ class NoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Note
         fields = ('id', 'user', 'title', 'content', 'created_at', 'updated_at')
+
+
