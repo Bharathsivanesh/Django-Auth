@@ -9,7 +9,8 @@ from .models import CustomUser
 from .models import Note
 from .serializers import NoteSerializer
 from .permissions import IsAdminUserCustom
-
+from rest_framework_simplejwt.views import TokenObtainPairView
+from .serializers import MyTokenObtainPairSerializer
 
 #Register user
 class RegisterView(generics.CreateAPIView):
@@ -75,3 +76,7 @@ class LogoutView(APIView):
 
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
+    #cutom beacus of addedd "user_type" field in resposne

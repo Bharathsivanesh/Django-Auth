@@ -41,9 +41,11 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_simplejwt.token_blacklist',
+    'corsheaders',
     'myapp'
 ]
 
+CORS_ALLOW_ALL_ORIGINS = True
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -55,8 +57,8 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),  # Short-lived access token
-    'REFRESH_TOKEN_LIFETIME': timedelta(minutes=60),  # Longer-lived refresh token
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),  # Short-lived access token
+    'REFRESH_TOKEN_LIFETIME': timedelta(minutes=10),  # Longer-lived refresh token
     'ROTATE_REFRESH_TOKENS': False,  # Optional: Rotate refresh tokens on use
     'BLACKLIST_AFTER_ROTATION': True, # Optional: Blacklist old refresh tokens
     'ALGORITHM': 'HS256',
@@ -66,7 +68,7 @@ SIMPLE_JWT = {
 AUTH_USER_MODEL = 'myapp.CustomUser'
 
 MIDDLEWARE = [
-
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
